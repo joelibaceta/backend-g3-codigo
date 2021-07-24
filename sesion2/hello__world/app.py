@@ -8,7 +8,7 @@ app = Flask(__name__)
 def hello_world():
     return 'hello world'
 
-@app.route('/user/<id>')
+@app.route('/user/<id>/logs')
 def get_user(id):
     return f"user: {id}"
 
@@ -29,7 +29,7 @@ def name_post():
 def hello_world_name():
     first_name = request.args.get('first_name')
     last_name = request.args.get('last_name')
-    return f"hello {first_name} {last_name}"
+    return f"hello <b>{first_name} {last_name}</b>"
 
 if __name__ == '__main__':
     app.run()

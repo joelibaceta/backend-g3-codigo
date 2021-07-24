@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>Flask</title>
+    </head>
+    <body>
+        {% if count == 0 %}
+            <h3>No se ha registrado ningun usuario</h3>
+        {% else %}
+            <h1>Usuarios ({{count}})</h1>
+            {% for key in users %}
+                <li>{{ users[key]["first_name"] }} {{ users[key]["last_name"] }}</li>
+            {% endfor %}
+        {% endif %}
+    </body>
+</html>
