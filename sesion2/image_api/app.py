@@ -31,12 +31,12 @@ def image():
     new_image=image
     # Si mirror es igual a "true"
     # Accionar operacion de conversion a imagen espejo
-    if mirror_flag=="true":
+    if mirror_flag == "true":
         new_image=ImageOps.mirror(new_image)
     # Si grayscale es igual a "true"
     # Accionar operacion de conversion a escala de grises
     if grayscale_flag == "true":
-        new_image=ImageOps.mirror(new_image)
+        new_image=ImageOps.grayscale(new_image)
     # Guardar la imagen resultante
     new_image.save("temp_file.jpg")
     # Retornar esa imagen nueva

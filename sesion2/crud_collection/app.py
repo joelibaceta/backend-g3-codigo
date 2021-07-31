@@ -28,7 +28,10 @@ def index():
 # Get all users
 @app.route('/users.json')
 def get_users():
-    return users
+    return {
+        "status": "ok",
+        "content": users
+    }
 
 @app.route('/users.html')
 def get_user_view():
