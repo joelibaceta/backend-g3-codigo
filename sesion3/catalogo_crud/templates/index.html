@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Productos</title>
+    </head>
+    <body>
+        <h1>Productos</h1>
+        <ul>
+            {% for product in products %}
+                <li>
+                    <a href="/product/{{product.idProducto}}">
+                        {{ product.nombre }}
+                    </a>
+                    <a href="/category/{{product.idCategoria}}/products">
+                        {{ product.categoria.nombre }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </body>
+
+</html>

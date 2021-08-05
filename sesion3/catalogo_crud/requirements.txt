@@ -2,4 +2,3 @@ Flask
 SQLAlchemy
 Flask-SQLAlchemy
 PyMySQL
-flask-marshmallow
