@@ -17,8 +17,15 @@ db = SQLAlchemy(app)
 
 from controllers import HelloWorld
 from controllers import CategoriesController
+from controllers import BooksController
+from controllers import BooksByCategoryController
 #from controllers import CategoryController
 
 api.add_resource(HelloWorld, '/')
 api.add_resource(CategoriesController, '/categories')
 #api.add_resource(CategoryController, '/category')
+
+api.add_resource(BooksController, '/books')
+
+# /category/<id>/books
+api.add_resource(BooksByCategoryController, '/category/<id>/books')
