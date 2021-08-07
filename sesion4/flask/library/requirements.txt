@@ -1,0 +1,8 @@
+Flask
+# ORM para bases de datos
+SQLAlchemy
+Flask-SQLAlchemy
+# Driver de conexion a base de datos
+PyMySQL
+# Extension para APIs REST
+Flask-RESTful
