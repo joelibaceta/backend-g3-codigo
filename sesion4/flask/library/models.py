@@ -7,11 +7,11 @@ class Book(db.Model):
     title = db.Column(db.String(100))
     autor = db.Column(db.String(45))
     year = db.Column(db.Integer)
-    idCategory = db.Column(db.Integer, db.ForeignKey('Category.idCategory'))
+    idCategory = db.Column(db.Integer, db.ForeignKey('category.idCategory'))
     category = relationship("Category", back_populates="books")
 
 class Category(db.Model):
-    idCategoria = db.Column(db.Integer, primary_key=True)
+    idCategory = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(45))
     books = relationship("Book", back_populates="category")
 

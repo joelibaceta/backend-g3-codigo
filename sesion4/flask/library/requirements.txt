@@ -6,3 +6,5 @@ Flask-SQLAlchemy
 PyMySQL
 # Extension para APIs REST
 Flask-RESTful
+# Serializador
+Flask-Marshmallow

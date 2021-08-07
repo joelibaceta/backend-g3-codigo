@@ -2,9 +2,11 @@ from flask import Flask
 from flask_restful import Resource, Api
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship
+from flask_marshmallow import Marshmallow
 
 app = Flask(__name__)
 api = Api(app)
+ma = Marshmallow(app)
 
 # Configurando parametros de conexion
 # mysql+pymysql://USER:PASSWORD@SERVER/DATABASE
@@ -14,7 +16,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = conn
 db = SQLAlchemy(app)
 
 from controllers import HelloWorld
-from controllers import CategoryController
+from controllers import CategoriesController
+#from controllers import CategoryController
 
 api.add_resource(HelloWorld, '/')
-api.add_resource(CategoryController, '/categories')
+api.add_resource(CategoriesController, '/categories')
+#api.add_resource(CategoryController, '/category')
