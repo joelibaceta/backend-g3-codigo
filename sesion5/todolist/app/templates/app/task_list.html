@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>Tareas</h1>
+        <ul>
+            {% for task in object_list %}
+                <li>{{task.title}}</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
