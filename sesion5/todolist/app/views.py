@@ -42,7 +42,7 @@ class TaskModelListView(ListView):
 
 class TaskModelDetailView(DetailView):
     model = Task
-
+    
 
 class TaskForm(forms.Form):
     title = forms.CharField()
