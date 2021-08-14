@@ -1,8 +1,5 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView
-from django import forms
-from django.views.generic.edit import FormView
-
+from django.shortcuts import redirect, render
+from django.views.generic import ListView, CreateView, UpdateView
 from app.models import Task
 
 # Function based views
@@ -12,13 +9,15 @@ def task_list(request):
     tasks = Task.objects.all()
     return render(request, 'app/task_list.html', {'object_list': tasks})
 
-def task_detail(request, id):
-    task = Task.objects.get(pk = id)
-    return render(request, 'app/task_detail.html', {'object': task})
+def create_task(request):
+    data = request.POST
+    new_task = Task()
+    new_task.title = data["title"]
+    new_task.description = data["description"]
 
-def new_task(request):
-    return render(request, 'app/task_form.html')
+    new_task.save()
 
+    return redirect('/tasks/')
 
 # Generic class based views
 
@@ -40,24 +39,10 @@ class TaskModelListView(ListView):
     #    se enviaran al template dentro de la variable object_list
     model = Task
 
-class TaskModelDetailView(DetailView):
+class TaskCreateView(CreateView):
     model = Task
-    
+    fields = '__all__'
 
-class TaskForm(forms.Form):
-    title = forms.CharField()
-    description = forms.CharField(widget= forms.Textarea)
+    def get_success_url(self):
+        return "/tasks/"
 
-class TaskFormView(FormView):
-    form_class = TaskForm
-    template_name = 'app/task_form2.html'
-
-
-class TaskModelForm(forms.ModelForm):
-    class Meta:
-        model = Task
-        fields = ('title', 'description')
-
-class TaskModelFormView(FormView):
-    form_class = TaskModelForm
-    template_name = 'app/task_form2.html'

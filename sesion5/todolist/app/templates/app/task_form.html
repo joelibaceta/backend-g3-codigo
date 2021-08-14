@@ -1,9 +1,5 @@
-<html>
-    <body>
-        <form method="POST" action="/create_task">
-            <p>Title: <input name="title" /></p>
-            <p>Description: <input name="description" /></p>
-            <button type="submit">Guardar</button>
-        </form>
-    </body>
-</html>
+<form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Guardar</button>
+</form>

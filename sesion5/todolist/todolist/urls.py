@@ -14,12 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
  
-from app.views import task_list, task_detail, new_task
-from app.views import TaskListView
-from app.views import TaskModelListView, TaskModelDetailView
-from app.views import TaskFormView, TaskModelFormView
+ 
 from django.contrib import admin
 from django.urls import path
+
+from app.views.tasks import task_list, TaskListView, TaskModelListView
+from app.views.tasks import create_task
+from app.views.tasks import TaskCreateView
+from app.views.task import TaskUpdateView
+from app.views.task import task_detail,TaskModelDetailView
+from app.views.task import TaskFormView, TaskModelFormView
+from app.views.task import new_task
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,6 +37,11 @@ urlpatterns = [
 
     path('task_form/', new_task),
     path('task_form2/', TaskFormView.as_view()),
-    path('task_form3/', TaskModelFormView.as_view())
+    path('task_form3/', TaskModelFormView.as_view()),
+
+    path('create_task/', create_task),
+    path('create_task2/', TaskCreateView.as_view()),
+
+    path('update_task2/<pk>/', TaskUpdateView.as_view())
 
 ]
