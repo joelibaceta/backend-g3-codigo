@@ -15,7 +15,31 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import include, url
+
+from core.viewsets import PostViewSet, PostModelViewSet
+
+from rest_framework import routers
+
+from rest_framework.documentation import include_docs_urls
+
+from rest_framework.authtoken.views import obtain_auth_token
+
+router = routers.DefaultRouter()
+router.register('posts', PostModelViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url(r'docs/', include_docs_urls(title="Microblog")),
+    path('api/', include(router.urls)),
+    path('posts/', PostViewSet.as_view({
+        'get': "list",
+        'post': "create"
+    })),
+    path('post/<pk>/', PostViewSet.as_view({
+        'get': "retrieve",
+        'put': "update",
+        'delete': "destroy"
+    })),
+    path('api-token/', obtain_auth_token)
 ]
