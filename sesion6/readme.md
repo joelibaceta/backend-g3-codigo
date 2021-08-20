@@ -23,5 +23,5 @@ npx sequelize-cli init
 5. Crear la base de datos
 
 ```
-npx sequelizer-cli db:create
+npx sequelize-cli db:create
 ```
