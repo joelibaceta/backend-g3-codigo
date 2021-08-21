@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 
 const { HelloController } = require('./controllers/hello_controller')
 const { ProductController } = require('./controllers/product_controller')
+const { CategoryController } = require('./controllers/category_controller')
 const myLogger = require('./middlewares/logger_middleware')
 
 const app = express()
@@ -24,6 +25,13 @@ app.get('/products', ProductController.findAll)
 app.get('/product/:id', ProductController.findOne)
 app.put('/product/:id', ProductController.update)
 app.delete('/product/:id', ProductController.delete)
+
+app.post('/categories', CategoryController.create)
+app.get('/categories', CategoryController.findAll)
+app.put('/category/:id', CategoryController.update)
+app.get('/category/:id', CategoryController.findOne)
+
+app.get('/category/:id/products', CategoryController.findProductsByCategory)
 
 app.listen(3000)
 
