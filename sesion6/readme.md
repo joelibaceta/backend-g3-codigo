@@ -25,3 +25,21 @@ npx sequelize-cli init
 ```
 npx sequelize-cli db:create
 ```
+
+6. Crear el primer modelo
+
+```
+npx sequelize-cli model:generate --name Product --attributes 
+```
+
+7. Generar modelo Producto
+
+```
+npx sequelize-cli model:generate --name Product  --attributes title:string,precio:float,description:string
+```
+
+8. Realizr migraciones 
+
+```
+npx sequelize-cli db:migrate
+```
