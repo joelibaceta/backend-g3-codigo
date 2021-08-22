@@ -5,17 +5,24 @@ class ProductController {
     static create(req, res) {
         let payload = req.body
         console.log(payload)
+        console.log(req.user)
 
-        Product.create(payload)
+        if (req.user.role=="admin") {
 
-            .then( (data) => { 
-                res.send(data) 
-            })
-            .catch( (err) => {
-                res.status(400).send({
-                    message: err.message
+            Product.create(payload)
+
+                .then( (data) => { 
+                    res.send(data) 
                 })
-            })
+                .catch( (err) => {
+                    res.status(400).send({
+                        message: err.message
+                    })
+                })
+        } else {
+            res.sendStatus(403)
+        }
+
 
         // newprodct = Product.create(payload)
         // return newproduct 
