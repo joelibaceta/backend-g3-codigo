@@ -6,12 +6,18 @@
     </head>
     <body>
         <h1>TODO APP</h1>
+        <form id="newTaskForm">
+            <input id="newTaskInput" />
+            <button type="submit">Agregar</button>
+        </form>
         <ul id="ulTasks">
             
         </ul>
 
-        <script type="module">
+        <script >
 
+            const form = document.getElementById('newTaskForm')
+            const input = document.getElementById('newTaskInput')
             const ulTasks = document.getElementById('ulTasks')
             // Your web app's Firebase configuration
             const firebaseConfig = {
@@ -27,15 +33,42 @@
             const app = firebase.initializeApp(firebaseConfig);
 
             const db = firebase.firestore()
+
+            const TerminarTarea = function(id) {
+                db.collection("tasks").doc(id).delete()
+                .then((docRef)=>{
+                    console.log("Deleted: " + id)
+                }).catch((error)=>{
+                    console.log("Error: " + error)
+                })
+            }
             
             db.collection("tasks").onSnapshot((querySnapshot) => {
                 let li_str = ""
                 querySnapshot.forEach((doc)=>{
                     let task = doc.data()
-                    li_str += "<li>"+ task["title"] + "</li>"
+                    li_str += "<li>"+ task['title']
+                    li_str += "<a href=\"javascript:TerminarTarea('" 
+                    li_str += doc.id + "')\"> Eliminar </a>"
+                    li_str += "</li>"
                 })
                 ulTasks.innerHTML=li_str
             })
+
+            
+
+            form.addEventListener("submit", function(event){
+                event.preventDefault()
+
+                db.collection("tasks").add({
+                    "title": input.value
+                }).then((docRef)=>{
+                    console.log("Created: " + docRef.id)
+                }).catch((error)=>{
+                    console.log("Error: " + error)
+                })
+                return false
+            }, false)
 
         </script>
 
