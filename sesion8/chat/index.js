@@ -28,6 +28,10 @@ io.on("connection", function(socket){
         socket.broadcast.emit("user_leave", this.username)
     })
 
+    socket.on("is_writting", function(){
+        socket.broadcast.emit("is_writting", this.username)
+    })
+
 })
 
 

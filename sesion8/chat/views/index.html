@@ -11,6 +11,7 @@
         </ul>
         <form>
             <input id="message" type="text" />
+            <div id="status"></div>
             <button>Send</button>
         </form>
 
@@ -20,6 +21,9 @@
 
             const form = document.querySelector("form")
             const input = document.getElementById("message")
+            const statusDiv = document.getElementById("status")
+
+            var is_writting = false;
             
             var username = prompt("Ingrese su nombre:")
 
@@ -38,6 +42,24 @@
                 addMessage(data + " ha salido de la sala")
             })
 
+            socket.on("is_writting", function(data){
+
+                if (is_writting==false) {
+                    is_writting = true
+                    statusDiv.innerText= data + " esta escribiendo ..."
+                    setTimeout(function(){
+                        statusDiv.innerText=""
+                        is_writting=false
+                    }, 1000)
+                }
+
+                
+            })
+
+
+
+
+
             form.addEventListener("submit", function(event){
                 event.preventDefault();
 
@@ -51,6 +73,10 @@
                 input.value=""
                 return false
             }, false) 
+
+            input.addEventListener("keypress", function(event){
+                socket.emit("is_writting")
+            })
 
 
             function addMessage(message) {
