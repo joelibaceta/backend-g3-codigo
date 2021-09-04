@@ -10,11 +10,13 @@ firebase.initializeApp({
 
 const db = firebase.firestore()
 
+const { v4 } = require('uuid')
+
 class Task {
 
   static create(task_data) {
     let taskCol = db.collection("tasks")
-    let taskDoc = taskCol.doc('test2')
+    let taskDoc = taskCol.doc(v4())
     taskDoc.set(task_data)
   }
 }

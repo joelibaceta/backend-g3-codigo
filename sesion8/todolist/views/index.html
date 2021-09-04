@@ -1,15 +1,42 @@
 <html>
     <head>
         <title>TODO List</title>
+        <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
     </head>
     <body>
         <h1>TODO APP</h1>
-        <ul>
+        <ul id="ulTasks">
             
         </ul>
 
-        <script>
+        <script type="module">
+
+            const ulTasks = document.getElementById('ulTasks')
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyBmjsyyzRX2heWEGXQZ34VaPixvDLUoEPg",
+                authDomain: "todo-list-c35fd.firebaseapp.com",
+                projectId: "todo-list-c35fd",
+                storageBucket: "todo-list-c35fd.appspot.com",
+                messagingSenderId: "905960419684",
+                appId: "1:905960419684:web:b3307865139024412b0a71"
+            };
+
+            // Initialize Firebase
+            const app = firebase.initializeApp(firebaseConfig);
+
+            const db = firebase.firestore()
             
+            db.collection("tasks").onSnapshot((querySnapshot) => {
+                let li_str = ""
+                querySnapshot.forEach((doc)=>{
+                    let task = doc.data()
+                    li_str += "<li>"+ task["title"] + "</li>"
+                })
+                ulTasks.innerHTML=li_str
+            })
+
         </script>
 
     </body>
