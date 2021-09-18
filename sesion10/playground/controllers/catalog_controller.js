@@ -1,4 +1,5 @@
 const { Product } = require('../models')
+const { KartItem } = require('../models')
 
 class CatalogController {
 
@@ -23,11 +24,23 @@ class CatalogController {
     }
 
     static listview(req, res) {
-        Product.findAll()
+        KartItem.findAll()
+        .then((kart)=> {
+            Product.findAll()
             .then((data)=>{
-                res.render(__dirname + "/../views/catalog_list.html", {products: data})
+                res.render(__dirname + "/../views/catalog_list.html", {products: data, kart: kart})
             })
-            .catch((err) => res.sendStatus(404))
+            .catch((err) => {
+                console.log(err.message)
+                res.sendStatus(404)
+            })
+        })
+        .catch((err) => {
+            console.log(err.message)
+            res.sendStatus(404)
+        })
+
+        
     }
 
 }

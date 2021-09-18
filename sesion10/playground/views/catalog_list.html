@@ -7,6 +7,8 @@
     </head>
     <body>
         <h1>eCommerce</h1>
+        <br/>
+        <a href="/kart">Carrito (<%= kart.length %>)</a>
         <div class="row">
         <% products.forEach((product) =>{ %>
             <div class="col">
@@ -15,7 +17,8 @@
                     <div class="card-body">
                         <h5 class="card-title"><%= product.name %></h5>
                         <p class="card-text">Precio: <%= product.price %>, Stock(<%= product.stock %>)</p>
-                        <a href="/api/products/<%= product.id %>/buy" class="btn btn-primary">Comprar</a>
+                        <a href="/api/product/<%= product.id %>/buy" class="btn btn-primary">Comprar</a>
+                        <a href="/api/product/<%= product.id %>/addToCart" class="btn btn-info">Agregar al Carrito</a>
                     </div>
                 </div>
             </div>

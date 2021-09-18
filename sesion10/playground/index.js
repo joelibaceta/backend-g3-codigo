@@ -7,6 +7,7 @@ const dotenv = require('dotenv')
 
 const { CatalogController } = require('./controllers/catalog_controller')
 const { PaymentController } = require('./controllers/payment_controller')
+const { KartController }  = require('./controllers/kart_controller')
 
 dotenv.config()
 
@@ -69,8 +70,10 @@ app.get('/', (req, res) => {
 app.post('/api/products', CatalogController.create)
 app.get('/api/products.json', CatalogController.list)
 app.get('/api/products', CatalogController.listview)
-app.get('/api/products/:id/buy', PaymentController.startPayment)
+app.get('/api/product/:id/buy', PaymentController.startPayment)
 app.get('/api/products/congrats', PaymentController.successfulPayment)
-
+app.get('/api/product/:id/addToCart', KartController.create)
+app.get('/kart', KartController.list)
+app.get('/kart/clear', KartController.clear)
 app.listen(3000)
 
