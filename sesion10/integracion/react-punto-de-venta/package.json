@@ -17,9 +17,11 @@
     "react-scripts": "4.0.3",
     "react-to-print": "^2.12.4",
     "socket.io-client": "^4.0.1",
+    "stringify": "^5.2.0",
     "sweetalert2": "^10.16.6",
     "uuid": "^8.3.2",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "webpack": "^4.46.0"
   },
   "scripts": {
     "start": "react-scripts start",
