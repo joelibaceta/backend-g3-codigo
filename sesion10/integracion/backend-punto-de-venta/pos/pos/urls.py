@@ -15,9 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls.static import static
+from django.conf import settings
 from core.controllers.auth_controller import LoginAPI
+from core.controllers.mesa_controller import MesaAPI
+from core.controllers.plato_controller import PlatoAPI
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login', LoginAPI.as_view())
+    path('login', LoginAPI.as_view()),
+    path('mesa', MesaAPI.as_view()),
+    path('mesa/<pk>', MesaAPI.as_view()),
+    path('plato', PlatoAPI.as_view()),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
